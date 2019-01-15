@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.5.22.js"></script>
+</head>
+<body>
+    <div id="mxy">
+        <!-- 1.插值表达式
+        <p>{{msg}}</p> -->
+
+        <!-- 2.v-text
+        <p v-text='msg'></p> -->
+
+        <!-- 3.v-html
+        <div v-html='msg'></div> -->
+
+        <!-- 4.v-bind 
+        <button :id='msg'></button> -->
+
+        <!-- 5.v-on
+        <button @click='dian'></button> -->
+
+        <!-- 6.跑马灯
+        <h2>{{msg}}</h2>
+        <button @click='start'>开始</button>
+        <button @click='end'>停止</button> -->
+    </div>
+</body>
+</html>
+<script>
+    //1.插值表达式
+    // var lm = new Vue({
+    //     el:'#mxy',
+    //     data:{
+    //         msg:'马向阳'
+    //     }
+    // })
+
+    // 2.v-text
+    // var lm = new Vue({
+    //     el:'#mxy',
+    //     data:{
+    //         msg:'马向阳'
+    //     }
+    // })
+
+    //3.v-html
+    // var lm = new Vue({
+    //     el:'#mxy',
+    //     data:{
+    //         msg:'请访问<a href="http://www.baidu.com">百度</a>'
+    //     }
+    // })
+
+    // 4.v-bind
+    // var lm = new Vue({
+    //     el:'#mxy',
+    //     data:{
+    //         msg:'请访问<a href="http://www.baidu.com">百度</a>'
+    //     }
+    // })
+
+    // 5.v-on
+    // var lm = new Vue({
+    //     el:'#mxy',
+    //     data:{
+    //         msg:'请访问<a href="http://www.baidu.com">百度</a>'
+    //     },
+    //     methods:{
+    //         dian:function(){
+    //             alert(111)
+    //         }
+    //     }   
+    // })
+
+    // 6.跑马灯
+    // var lm = new Vue({
+    //     el:'#mxy',
+    //     data:{
+    //         msg:' 为崽而战，冬日战歌 ',
+    //         flag:0
+    //     },
+    //     methods:{
+    //         start:function(){
+    //             if(this.flag===0){
+    //                 this.flag = window.setInterval(()=>{
+    //                     var first = this.msg.slice(0,1)
+    //                     var other = this.msg.slice(1)
+    //                     this.msg = other+first
+    //                 },5)
+    //             }
+    //         },
+    //         end:function(){
+    //             window.clearInterval(this.flag)
+    //             this.flag=0
+    //         }    
+    //     }   
+    // })
+
+
+</script>
