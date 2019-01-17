@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.5.22.js"></script>
+    <style>
+        /* html,body,#app{
+            height: 100%;
+        }
+        body,h2{
+            margin: 0;
+            padding:0;
+        } */
+
+        /* table{
+            width: 700px;
+            border: 1px, solid, black;
+            margin: auto;
+            border-collapse: collapse;
+        }
+
+        td{
+            border: 1px, solid, black
+        } */
+
+        /* .apple {
+            width: 400px;
+            height: 300px;
+            background-color: yellowgreen;
+        }
+
+        p {
+            width: 300px;
+            height: 200px;
+            background-color: powderblue;
+        }
+
+        span {
+            display: block;
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+        } */
+    </style>
+</head>
+
+<body>
+    <!-- 1.v-model 案例1
+    <div id="app">
+        <h2>{{msg}}</h2>
+        <input type="text" :value='msg'>
+        <input type="text" v-model='msg'>
+        <button @click='xiugai'>点击修改</button>
+    </div> -->
+
+    <!-- 1.v-model 案例2
+    <div id="app">
+        <textarea v-model='msg'></textarea>
+        <p>当前文字个数为：{{msg.length}}</p>
+    </div> -->
+
+    <!-- 1.v-model 案例3
+    <div id="app">
+        <input type="text" v-model="n1">
+        <input type="text" v-model="n2">
+        <button @click='add'>计算</button>
+        <span>{{msg}}</span>
+    </div> -->
+
+    <!-- 1.2.1 
+    <div id="app">
+        <h2 class="apple pear orange">学习</h2>
+        <h2 :class="[s1,s2,s3]">学习</h2>
+        <h2 :class="{apple:true,pear:false,orange:true}">学习</h2>
+    </div> -->
+
+    <!-- 1.2.2
+    <div id="app">
+        <p style="color:beige;font-size:14px;background-color:bisque;">aaaaa</p>
+        <p :style="{color:yanse,'font-size':bigsmall,'background-color':bjys}">aaaaa</p>
+        <p :style="[{color:flag?yanse:''},{'font-size':bigsmall},{'background-color':blue}]">aaaaa</p>
+    </div> -->
+
+    <!-- 网页开关灯案例
+    <div id="app" :style = 'flag? baitian : heiyei'>
+        <h2>网页开关灯</h2>
+        <button @click='flag=!flag'>开关灯</button>
+    </div> -->
+
+    <!-- v-for和:key属性
+    <div id="app">
+        <ul>
+            <li v-for='item in city'>{{item}}</li>
+        </ul>
+        <ul>
+            <li v-for='(item,k) in city'>{{k}}---{{item}}</li>
+        </ul>
+    </div> -->
+
+    <!-- :key应用
+    <div id="app">
+        <table>
+            <tr>
+                <td colspan="3">
+                    <input type="text" v-model='name'>
+                    <button @click='add'>添加</button>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>序号</td>
+                <td>名称</td>
+            </tr>
+            <tr v-for='(item,k) in goods' :key='item.id'>
+                <td><input type="checkbox"></td>
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+            </tr>
+        </table>
+    </div> -->
+
+    <!-- v-if和v-show
+    <div id="app">
+        <button @click='flag=!flag'>显示/隐藏</button>
+        <h2 v-if='flag'>一花一世界</h2>
+        <h2 v-show='flag'>一烨一菩提</h2>
+    </div> -->
+
+    <!-- v-if、v-else-if和v-else
+    <div id="app">
+       <h2 v-if='score>90'>A</h2>
+       <h2 v-else-if='score>80'>B</h2>
+       <h2 v-else>C</h2>       
+    </div> -->
+
+    <!-- 修饰符
+    按键修饰符
+    - .enter
+    - .tab
+    - .esc
+    - .space
+    - .left
+    - .right
+    - .up
+    - .down
+    <div id="app">
+        <p>用户名：<input type="text" @keyup.esc='kp'></p>
+    </div> -->
+
+    <!-- 事件修饰符
+    .prevent 阻止默认行为
+    .once 只触发1次 -
+    .stop 阻止冒泡 -
+    .self 只有在当前元素上触发事件的时候， 才会调用处理函数
+    <div id="app">
+        <div class="apple" @click.stop='clkd'>
+            大哥
+            <p @click.stop='clkp'>
+                小弟
+                <span @click.stop='clks'>
+                    小小第
+                </span>
+            </p>
+        </div>
+    </div> -->
+</body>
+
+</html>
+<script>
+    // 1.v-model 案例1
+    // const play = new Vue({
+    //     el: '#app',
+    //     data:{
+    //         msg:'沙雕老马'
+    //     },
+    //     methods:{
+    //         xiugai:function(){
+    //             this.msg='沙雕老杨'
+    //         }
+    //     }
+    // })
+
+    // 1.v-model 案例2
+    // const play = new Vue({
+    //     el: '#app',
+    //     data:{
+    //         msg:''
+    //     },
+    //     methods:{
+    //     }
+    // })
+
+    // 1.v-model 案例2
+    // const play = new Vue({
+    //     el: '#app',
+    //     data:{
+    //         n1:'',
+    //         n2:'',
+    //         msg:''
+    //     },
+    //     methods:{
+    //         add:function(){
+    //             this.msg=parseFloat(this.n1)+parseFloat(this.n2)
+    //         }
+    //     }
+    // })
+
+    // 1.2 样式操作
+
+    // 1.2.1 绑定HTML class
+    // var lm = new Vue({
+    //     el:'#app',
+    //     data:{
+    //         s1:'apple',
+    //         s2:'pear',
+    //         s3:'renyao'
+    //     },
+    //     methods:{}
+    // })
+
+    // 1.2.2 操作行内样式
+    // var lm = new Vue({
+    //     el:'#app',
+    //     data:{
+    //         yanse:'green',
+    //         bigsmall:'30px',
+    //         bjys:'blue'
+    //     },
+    //     methods:{}
+    // })
+
+    // 开关灯案例
+    // var lm = new Vue({
+    //     el:'#app',
+    //     data:{
+    //         baitian:{
+    //             'background-color':'white',
+    //             color:'green',
+    //             'font-size':'45px'
+    //         },
+    //         heiyei:{
+    //             'background-color':'black',
+    //             color:'white',
+    //             'font-size':'45px'
+    //         },
+    //         flag:true
+    //     },
+    //     methods:{}
+    // })
+
+    // v-for案例
+    // var lm = new Vue({
+    //     el:'#app',
+    //     data:{
+    //         city:['北京','上海','广州']
+    //     },
+    //     methods:{}
+    // })
+
+    // var lm = new Vue({
+    //     el:'#app',
+    //     data:{
+    //         city:{name:'laoma',leg:4,eye:2}
+    //     },
+    //     methods:{}
+    // })
+
+    // :kye应用
+    // var lm = new Vue({
+    //     el:'#app',
+    //     data:{
+    //         name:'',
+    //         goods:[
+    //             {id:1,name:'小米'},
+    //             {id:2,name:'中兴'},
+    //             {id:3,name:'华为'}
+    //         ]
+    //     },
+    //     methods:{
+    //         add(){
+    //             var newid = this.goods.length+1
+    //             var obj = {id:newid,name:this.name}
+    //             this.goods.unshift(obj)
+    //             this.name = ''
+    //         }
+    //     }
+    // })
+
+    // v-if和v-show
+    // var lm = new Vue({
+    //     el:'#app',
+    //     data:{
+    //         flag:true
+    //     },
+    //     methods:{}
+    // })
+
+    // v-if、v-else-if和v-else
+    // var lm = new Vue({
+    //     el:'#app',
+    //     data:{
+    //         score:78
+    //     },
+    //     methods:{}
+    // })
+
+    // 按键修饰符
+    // var lm = new Vue({
+    //     el:'#app',
+    //     data:{
+    //     },
+    //     methods:{
+    //         kp(evt){
+    //             console.log('laomalaoma')
+    //         }
+    //     }
+    // })
+
+    // 事件修饰符
+    // var lm = new Vue({
+    //     el: '#app',
+    //     data: {},
+    //     methods: {
+    //         clkd() {
+    //             console.log('div div')
+    //         },
+    //         clkp() {
+    //             console.log('span span')
+    //         },
+    //         clks() {
+    //             console.log('span div')
+    //         },
+    //     }
+    // })
+
+    进阶计算器
+    const play = new Vue({
+        el: '#app',
+        data:{
+            n1:'',
+            n2:'',
+            msg:''
+        },
+        methods:{
+            add:function(){
+                this.msg=parseFloat(this.n1)+parseFloat(this.n2)
+                this.msg=parseFloat(this.n1)-parseFloat(this.n2)
+                this.msg=parseFloat(this.n1)*parseFloat(this.n2)
+                this.msg=parseFloat(this.n1)/parseFloat(this.n2)
+            }
+        }
+    })
+</script>
+
+<!-- <script>
+    // 字面量对象成员的简便设置
+    var name = 'laoma'
+    var height = '150'
+    var run = function(){
+        console.log('日狗中')
+    }
+
+    var person = {name:name,height:height,run:run}
+
+    var person1 = {name,height,run}
+    console.log(person)
+    console.log(person1)
+
+    var obj = {
+        walk(){
+            console.log('狗在叫')
+        }
+    }
+    obj.walk()
+</script> -->
