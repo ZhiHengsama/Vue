@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.5.22.js"></script>
+    <style>
+
+        table{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        td{
+            border:1px solid black;
+            width: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 进阶款计算器
+    <div id="app">
+        <input type="text" v-model='n1'>&nbsp;
+        <select v-model='select'>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>&nbsp;
+        <input type="text" v-model='n2'>&nbsp;
+        <button @click='dy'>=</button>&nbsp;
+        <input type="text" :value='result'>
+    </div> -->
+
+    <!-- 品牌管理
+    <div id="app">
+        <h2>品牌管理</h2>
+        <table>
+            <tr>
+                <td colspan="2">
+                    <input type="text" v-model='newname' @keyup.enter='add' @keyup.esc='newname'>
+                    <button @click='add'>添加</button>
+                </td>
+                <td colspan="2">
+                    <input type="text" v-model='keywords'>
+                    <button @click='search'>查询</button>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>序号</td>
+                <td>名称</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for='(item,k) in search()' :key='item.id'>
+                <td><input type="checkbox"></td>
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td><button @click='del(item.id)'>删除</button></td>
+            </tr>
+        </table>
+    </div> -->
+
+    <!-- 过滤器
+    <div id="app">
+        <p>{{my | jsFormat}}</p>
+    </div>
+    <div id="app2">
+        <p>{{you | jsFormat}}</p>
+    </div> -->
+
+    <!-- 私有过滤器
+    <div id="app">
+        <p>{{subject}}</p>
+        <p>{{subject|toBigCase}}</p>
+    </div> -->
+
+    <!-- Vue生命周期 -->
+    <!-- 1.Vue.$mount()动态挂载实例
+    <div id="app">
+        <h2>{{msg}}</h2>
+    </div> -->
+</body>
+
+</html>
+<script>
+    // 进阶版计算器
+    // var lm = new Vue({
+    //     el: '#app',
+    //     data: {
+    //         n1: '',
+    //         n2: '',
+    //         result: '',
+    //         select: ''
+    //     },
+    //     methods: {
+    //         dy() {
+    //             switch (this.select) {
+    //                 case '+':
+    //                     this.result = +this.n1 + +this.n2
+    //                     break;
+    //                 case '-':
+    //                     this.result = +this.n1 - +this.n2
+    //                     break;
+    //                 case '*':
+    //                     this.result = +this.n1 * +this.n2
+    //                     break;
+    //                 case '/':
+    //                     this.result = +this.n1 / +this.n2
+    //                     break;
+    //             }
+    //         }
+    //     }
+    // })
+
+    // 品牌管理
+    // var lm = new Vue({
+    //     el: '#app',
+    //     data: {
+    //         newname: '',
+    //         goods: [{
+    //                 id: 1,
+    //                 name: '华为'
+    //             },
+    //             {
+    //                 id: 2,
+    //                 name: '小米'
+    //             },
+    //             {
+    //                 id: 3,
+    //                 name: '中兴'
+    //             }
+    //         ],
+    //         keywords:''
+    //     },
+    //     methods: {
+    //         add() {
+    //             var newid = this.goods.length + 1
+    //             var obj = {
+    //                 id: newid,
+    //                 name: this.newname
+    //             }
+    //             this.goods.unshift(obj)
+    //             this.newname = ''
+    //         },
+    //         del(id) {
+    //             if (window.confirm('真删除啊？')) {
+    //                 var k = this.goods.findIndex(function (item) {
+    //                     return item.id === id
+    //                 })
+    //                 this.goods.splice(k, 1)
+    //             }
+    //         },
+    //         search(){
+    //             return this.goods.filter((item)=>{
+    //                 return item.name.includes(this.keywords)
+    //             })
+    //         }
+    //     }
+    // })
+
+    // 过滤器
+    // Vue.filter('jsFormat',function(original){
+    //     var tm = new Date(original)
+    //     var y = tm.getFullYear()
+    //     var m = tm.getMonth()+1
+    //     var d = tm.getDate()
+    //     var h = tm.getHours()
+    //     var i = tm.getMinutes()
+    //     var s = tm.getSeconds()
+    //     return `${y}-${m}-${d} ${h}:${i}:${s}`
+    // })
+    // var lm = new Vue({
+    //     el:'#app',
+    //     data:{
+    //         my:new Date()
+    //     },
+    //     methods:{
+    //     }
+    // })
+    // var lm2 = new Vue({
+    //     el:'#app2',
+    //     data:{
+    //         you:new Date()
+    //     },
+    //     methods:{
+    //     }
+    // })
+    // 私人过滤器
+    // var lm = new Vue({
+    //     el:'#app',
+    //     data:{
+    //         subject:'good fuck'
+    //     },
+    //     methods:{
+    //     },
+    //     filters:{
+    //         toBigCase(original){
+    //             return original.toUpperCase()
+    //         }
+    //     }
+    // })
+    // Vue.$mount()动态挂载实例
+    // var lm = new Vue({
+    //     // el:'#app',
+    //     data:{
+    //         msg:'学习Vue'
+    //     },
+    //     methods:{
+    //     }
+    // })
+    // lm.$mount('#app')
+    // template属性指定模板
+    // var lm = new Vue({
+    //     el:'#app',
+    //     data:{
+    //         msg:'学习Vue'
+    //     },
+    //     methods:{
+    //     },
+    //     template:'<h6>laoma</h6>'
+    // })
+    // render函数渲染
+    // var lm = new Vue({
+    //     el:'#app',
+    //     data:{
+    //         msg:'学习Vue'
+    //     },
+    //     methods:{
+    //     },
+    //     template:'<h6>laoma</h6>',
+    //     render(create){
+    //         return create('h4','休息休息')
+    //     }
+    // })
+</script>
