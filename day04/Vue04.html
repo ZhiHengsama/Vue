@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue-2.5.22.js"></script>
+<script src="../day04/node_modules/axios/dist/axios.js"></script>
+
+<body>
+    <!-- get请求
+     <div id="app">
+        axios 实现数据接口请求
+        <p><button @click='request_get'>get请求</button></p>
+    </div> -->
+    -->
+
+    <!-- post请求
+    <div id="app">
+        axios 实现数据接口请求
+        <p><button @click='request_post'>post请求</button></p>
+    </div> -->
+
+    axios使用调整
+    1.设置请求根地址
+    2.把axios传递给Vue间接使用
+    <div id="app">
+        <h2>axios实现客户端向服务端发起请求</h2>
+        <p><button @click='request_get'>get请求</button></p>
+        <p><button @click='request_post'>post请求</button></p>
+    </div>
+</body>
+
+</html>
+<script>
+    // var lm = new Vue({
+    //     el: '#app',
+    //     data:{},
+    //     methods:{
+    //         async request_get(){
+    //             var result = await axios.get('http://127.0.0.1:3006/api/get',
+    //                 {
+    //                     params:{name:'kitty',color:'blue'}
+    //                 }
+    //             )
+    //             console.log(result)
+    //         }
+    //     }
+    // })
+
+    // 解构赋值
+    // var obj = {
+    //     name:'tom',height:170,walk:'日老马'}
+    //     var {name,height,walk:wk} = obj
+    //     console.log(name,height,wk)
+
+    // post请求
+    // var lm = new Vue({
+    //     el: '#app',
+    //     data: {},
+    //     methods: {
+    //         async request_post() {
+    //             const {data:res} = await axios.post('http://127.0.0.1:3006/api/post', {
+    //                 params: {
+    //                     address: 'kitty',
+    //                     year: '2019'
+    //                 }
+    //             })
+    //             console.log(res)
+    //         }
+    //     }
+    // })
+
+    // axios使用调整
+    axios.defaults.baseURL = 'http://127.0.0.1:3006/'
+    Vue.prototype.$http = axios
+    var lm = new Vue({
+        el:'#app',
+        data:{
+        },
+        methods:{
+            //POST请求
+            async request_post(){
+                const {data:res} = await this.$http.post('/api/post',
+                {address:'laomajia',year:2019})
+                console.log(res);
+            },
+            //get请求
+            async request_get(){
+                var {data:res} = await this.$http.get('/api/get',
+                {name:'kitty',age:180})
+                console.log(res)
+            }
+        }
+    })
+</script>
