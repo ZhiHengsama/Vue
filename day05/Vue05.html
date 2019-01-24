@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../day05/node_modules/axios/dist/axios.min.js"></script>
+    <script src="./vue-2.5.22.js"></script>
+    <style>
+        /* p {
+            width: 100%;
+            height: 40px;
+            background-color: gold;
+            text-align: center;
+            line-height: 40px;
+        } */
+        table{
+            width: 700px;
+            border:1px solid black;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        td{
+            border: 1px solid black;
+        }
+        h2{
+            width: 700px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 通过拦截器给页面设置加载效果
+    <div id="app">
+        <button @click='request_get'>get请求</button>
+        <p v-if='show'>正在请求.....</p>
+        <div v-show='show'>
+            <img src="./loading.gif" width="150" height="150">
+        </div>
+    </div> -->
+
+    品牌管理案例升级
+    <div id="app">
+        <h2>商品品牌管理</h2>
+        <table>
+            <tr>
+                <td colspan="2">
+                    <input type="text" v-model='newname' @keyup.enter='add' @keyup.esc=''>
+                    <button @click='add'>添加</button>
+                </td>
+                <td colspan="2">
+                    搜索：
+                    <input type="text" v-model='keywords'/>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>序号</td>
+                <td>名称</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for='(item,k) in search()' :key='item.id'>
+                <td><input type="checkbox"></td>
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td><button @click='del(item.id)'>删除</button></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
+<script>
+    // 通过拦截器给页面设置加载效果
+    // var instance = axios.create({
+    //     baseURL: 'http://127.0.0.1:3006'
+    // })
+    // Vue.prototype.$http = instance
+
+    // var lm = new Vue({
+    //     created() {
+    //         this.$http.interceptors.request.use(config => {
+    //                 this.show = true
+    //                 return config
+    //             },
+    //             function (error) {
+    //                 return Promise.reject(error)
+    //             }
+    //         );
+    //         this.$http.interceptors.response.use(response => {
+    //                 this.show = false
+    //                 return response
+    //             },
+    //             function (error) {
+    //                 return Promise.reject(error)
+    //             }
+    //         );
+    //     },
+    //     el: '#app',
+    //     data: {
+    //         show: false
+    //     },
+    //     methods: {
+    //         async request_get() {
+    //             const {
+    //                 data: res
+    //             } = await this.$http.get('/api/get', {
+    //                 params: {
+    //                     info: '加载'
+    //                 }
+    //             })
+    //         }
+    //     }
+    // })
+
+    // 品牌管理案例升级
+    axios.defaults.baseURL = 'http://127.0.0.1:3006'
+    Vue.prototype.$http = axios
+
+    var lm = new Vue({
+        created(){
+            this.getGoodsList()
+        },
+        el:'#app',
+        data:{
+            newname:'',
+            goods:[],
+            keywords:''
+        },
+        methods:{
+            async getGoodsList(){
+                const {data:res} = await this.$http.get('/api/getprodlist')
+                if(res.status!==0){
+                    return alert('品牌列表数据获取失败')
+                }
+                this.goods = res.message
+            },
+            search(){
+                return this.goods.filter((item)=>{
+                    return item.name.includes(this.keywords)
+                })
+            },
+            async del(id){
+                if(window.confirm('确认要删除该')){
+                    const {data:res} = await this.$http.get('/api/delproduct/'+id)
+                    if(res.status!==0){
+                        return alert('品牌列表数据删除失败')
+                    }
+                    this.getGoodsList()
+                }
+            },
+            async add(){
+                const {data:res} = await this.$http.post('/api/addproduct',{name:this.newname})
+                if(res.status!==0){
+                        return alert('品牌列表数据添加失败')
+                }
+                this.getGoodsList()
+                this.newname=''
+            }
+        }
+    })
+</script>
